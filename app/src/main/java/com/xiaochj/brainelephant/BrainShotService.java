@@ -25,17 +25,30 @@ public class BrainShotService extends AccessibilityService {
     if(pkgName.equalsIgnoreCase(getString(R.string.pkgname))){
       if(eventType == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED){
         //打开客户端
-        List<AccessibilityNodeInfo> nodeInfos = getRootInActiveWindow().findAccessibilityNodeInfosByText(getString(R.string.first_text));
-        int size = nodeInfos.size();
-        if (size == 0)
-          return;
-        if (size == 1) {
-          nodeInfos.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
-          return;
-        }
+        openTheTruth(getString(R.string.first_text),getString(R.string.radio_name));
       }else if(eventType == AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED){
-        Utils.LogUtil("d","aaa","content");
+        //打开工作台
+        openTheTruth(getString(R.string.second_text),"aa");
       }
+    }
+  }
+
+  private void openTheTruth(String text,String className) {
+    List<AccessibilityNodeInfo>
+        nodeInfos = getRootInActiveWindow().findAccessibilityNodeInfosByText(text);
+    int size = nodeInfos.size();
+    if (size == 0)
+      return;
+    if (size >= 1) {
+      int temp = 0;
+      while (temp < size){
+        if(nodeInfos.get(temp).getClassName().equals(className)){
+          nodeInfos.get(temp).performAction(AccessibilityNodeInfo.ACTION_CLICK);
+          break;
+        }
+        temp++;
+      }
+      return;
     }
   }
 

@@ -3,4 +3,6 @@
 
   <string name="pkgname">com.sankuai.xmpp</string>
   <string name="first_text">工作台</string>
+  <string name="radio_name">android.widget.RadioButton</string>
+  <string name="second_text">一键打卡</string>
 </resources>
